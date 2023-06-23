@@ -4,6 +4,11 @@ const User = require('../models/users')
 
 const {checkBody} = require('../modules/checkBody')
 
+router.get('/', (req, res) => {
+	User.find().then(data => {
+		res.json({ weather: data });
+	});
+});
 router.post('/signup', (req,res) => {
     if(!checkBody(req.body,['name','email', 'password'])) {
         res.json({result:false,error: 'Missing or empty fields' })
